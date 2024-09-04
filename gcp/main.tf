@@ -21,7 +21,7 @@
 module "bigquery_extract" {
   source = "git@github.com:StitcherAI/tf-modules.git//gcp/bigquery-extract-binding"
 
-  stitcher_environment_id = var.stitcher_environment_id
+  stitcher_environment_id = var.stitcherai_environment_id
   gcp_domain              = var.gcp_domain
   gcp_project_id           = var.gcp_project_id
   bigquery_cost_dataset_id = var.cost_extract_dataset_id
@@ -37,7 +37,7 @@ module "bigquery_extract" {
 module "gcs_extract" {
   source = "git@github.com:StitcherAI/tf-modules.git//gcp/gcs-extract-binding"
   
-  stitcher_environment_id = var.stitcher_environment_id
+  stitcher_environment_id = var.stitcherai_environment_id
   gcp_domain              = var.gcp_domain
   gcs_bucket = var.business_data_bucket
   gcs_path   = var.business_data_path
@@ -52,7 +52,7 @@ module "gcs_extract" {
 module "bigquery_export" {
   source = "git@github.com:StitcherAI/tf-modules.git//gcp/bigquery-export-binding"
   
-  stitcher_environment_id = var.stitcher_environment_id
+  stitcher_environment_id = var.stitcherai_environment_id
   gcp_domain              = var.gcp_domain
   gcp_project_id             = var.gcp_project_id
   bigquery_export_dataset_id = var.export_dataset_id
@@ -62,7 +62,7 @@ module "bigquery_export" {
 module "gcs_export" {
   source = "git@github.com:StitcherAI/tf-modules.git//gcp/gcs-export-binding"
   
-  stitcher_environment_id = var.stitcher_environment_id
+  stitcher_environment_id = var.stitcherai_environment_id
   gcp_domain              = var.gcp_domain
   gcs_bucket = var.export_data_bucket
   gcs_path   = var.export_data_path

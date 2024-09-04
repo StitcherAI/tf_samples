@@ -1,6 +1,6 @@
-variable "stitcher_environment_id" {
+variable "stitcherai_environment_id" {
+  description = "The StitcherAI environment id. (Provided by StitcherAI)"
   type        = string
-  description = "The StitcherAI environment id."
 }
 
 variable "gcp_domain" {

@@ -3,9 +3,9 @@ variable "stitcher_ai_aws_account_id" {
   type    = string
 }
 
-variable "stitcher_ai_environment_id" {
-  description = "The StitcherAI customer environment id. (Provided by StitcherAI)"
-  type    = string
+variable "stitcherai_environment_id" {
+  description = "The StitcherAI environment id. (Provided by StitcherAI)"
+  type        = string
 }
 
 variable "read_iam_role_name" {

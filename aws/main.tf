@@ -19,7 +19,7 @@
 
 module "read_iam_role" {
   source         = "git@github.com:StitcherAI/tf-modules.git//aws/iam-role"
-  environment_id = var.stitcher_ai_environment_id
+  environment_id = var.stitcherai_environment_id
   external_id    = var.stitcher_ai_aws_account_id
 
   stitcher_ai_aws_account_id = var.stitcher_ai_aws_account_id
@@ -29,7 +29,7 @@ module "read_iam_role" {
 
 module "write_iam_role" {
   source         = "git@github.com:StitcherAI/tf-modules.git//aws/iam-role"
-  environment_id = var.stitcher_ai_environment_id
+  environment_id = var.stitcherai_environment_id
   external_id    = var.write_external_id
 
   stitcher_ai_aws_account_id = var.stitcher_ai_aws_account_id
