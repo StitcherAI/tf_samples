@@ -18,23 +18,23 @@
 # mentioned above a customer may chose to create a single role for both scenarios as well)
 
 module "read_iam_role" {
-  source         = "git@github.com:StitcherAI/tf-modules.git//aws/iam-role"
-  environment_id = var.stitcherai_environment_id
-  external_id    = var.stitcher_ai_aws_account_id
+  source = "git@github.com:StitcherAI/tf-modules.git//aws/iam-role"
 
-  stitcher_ai_aws_account_id = var.stitcher_ai_aws_account_id
+  stitcher_environment_id        = var.stitcher_ai_environment_id
+  stitcher_aws_iam_principal_arn = var.stitcher_aws_iam_principal_arn
 
-  iam_role_name = var.read_iam_role_name # User-defined IAM role name (e.g. stitcher-ai-role) from tfvars file
+  customer_iam_role_name = var.read_iam_role_name # User-defined IAM role name (e.g. stitcher-ai-write-role) from tfvars file
+  customer_external_id   = var.read_external_id
 }
 
 module "write_iam_role" {
-  source         = "git@github.com:StitcherAI/tf-modules.git//aws/iam-role"
-  environment_id = var.stitcherai_environment_id
-  external_id    = var.write_external_id
+  source = "git@github.com:StitcherAI/tf-modules.git//aws/iam-role"
 
-  stitcher_ai_aws_account_id = var.stitcher_ai_aws_account_id
+  stitcher_environment_id        = var.stitcher_ai_environment_id
+  stitcher_aws_iam_principal_arn = var.stitcher_aws_iam_principal_arn
 
-  iam_role_name = var.write_iam_role_name # User-defined IAM role name (e.g. stitcher-ai-role) from tfvars file
+  customer_iam_role_name = var.write_iam_role_name # User-defined IAM role name (e.g. stitcher-ai-read-role) from tfvars file
+  customer_external_id   = var.write_external_id
 }
 
 
@@ -53,9 +53,10 @@ module "cur_describe_policy" {
 
 # S3 read and list API access for configured bucket/path (s3-extract-policy)
 module "cur_extract_policy" {
-  source    = "git@github.com:StitcherAI/tf-modules.git//aws/s3-extract-policy"
-  s3_bucket = var.stitcher_ai_s3_read_bucket
-  s3_path   = var.cur_s3_path
+  source = "git@github.com:StitcherAI/tf-modules.git//aws/s3-extract-policy"
+
+  customer_s3_bucket = var.stitcher_ai_s3_read_bucket
+  customer_s3_path   = var.cur_s3_path
 
   stitcher_ai_role = module.read_iam_role.stitcher_ai_role
 }
@@ -69,9 +70,10 @@ module "cur_extract_policy" {
 
 # S3 read and list API access for configured bucket/path (s3-extract-policy)
 module "s3_ref_extract_policy" {
-  source    = "git@github.com:StitcherAI/tf-modules.git//aws/s3-extract-policy"
-  s3_bucket = var.stitcher_ai_s3_read_bucket
-  s3_path   = var.business_data_s3_path
+  source = "git@github.com:StitcherAI/tf-modules.git//aws/s3-extract-policy"
+
+  customer_s3_bucket = var.stitcher_ai_s3_read_bucket
+  customer_s3_path   = var.business_data_s3_path
 
   stitcher_ai_role = module.read_iam_role.stitcher_ai_role
 }
@@ -85,9 +87,10 @@ module "s3_ref_extract_policy" {
 
 # S3 write and delete API access for configured bucket/path (s3-export-policy)
 module "s3_export_policy" {
-  source    = "git@github.com:StitcherAI/tf-modules.git//aws/s3-export-policy"
-  s3_bucket = var.stitcher_ai_s3_write_bucket
-  s3_path   = var.s3_write_path
+  source = "git@github.com:StitcherAI/tf-modules.git//aws/s3-export-policy"
+
+  customer_s3_bucket = var.stitcher_ai_s3_write_bucket
+  customer_s3_path   = var.s3_write_path
 
   stitcher_ai_role = module.write_iam_role.stitcher_ai_role
 }
