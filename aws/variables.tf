@@ -1,9 +1,9 @@
-variable "stitcher_ai_aws_account_id" {
-  description = "The StitcherAI AWS account id. (Provided by StitcherAI)"
+variable "stitcher_aws_iam_principal_arn" {
+  description = "The StitcherAI AWS IAM principal ARN. (Provided by StitcherAI)"
   type    = string
 }
 
-variable "stitcherai_environment_id" {
+variable "stitcher_ai_environment_id" {
   description = "The StitcherAI environment id. (Provided by StitcherAI)"
   type        = string
 }
