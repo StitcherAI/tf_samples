@@ -23,7 +23,7 @@ module "read_iam_role" {
   stitcher_environment_id        = var.stitcher_ai_environment_id
   stitcher_aws_iam_principal_arn = var.stitcher_aws_iam_principal_arn
 
-  customer_iam_role_name = var.read_iam_role_name # User-defined IAM role name (e.g. stitcher-ai-role) from tfvars file
+  customer_iam_role_name = var.read_iam_role_name # User-defined IAM role name (e.g. stitcher-ai-write-role) from tfvars file
   customer_external_id   = var.read_external_id
 }
 
@@ -33,7 +33,7 @@ module "write_iam_role" {
   stitcher_environment_id        = var.stitcher_ai_environment_id
   stitcher_aws_iam_principal_arn = var.stitcher_aws_iam_principal_arn
 
-  customer_iam_role_name = var.write_iam_role_name # User-defined IAM role name (e.g. stitcher-ai-role) from tfvars file
+  customer_iam_role_name = var.write_iam_role_name # User-defined IAM role name (e.g. stitcher-ai-read-role) from tfvars file
   customer_external_id   = var.write_external_id
 }
 
