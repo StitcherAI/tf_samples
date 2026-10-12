@@ -1,0 +1,26 @@
+# StitcherAI AWS IAM principal ARN (provided by StitcherAI)
+stitcher_aws_iam_principal_arn = "arn:aws:iam::123456789012:role/StitcherAI-Principal-Role"
+
+# StitcherAI environment id (provided by StitcherAI)
+stitcher_ai_environment_id = "env-12345678-abcd-1234-efgh-123456789012"
+
+# Read IAM role configuration
+read_iam_role_name = "StitcherAI-Read-Role"
+read_external_id   = "unique-read-external-id-12345"
+
+# Write IAM role configuration
+write_iam_role_name = "StitcherAI-Write-Role"
+write_external_id   = "unique-write-external-id-67890"
+
+# S3 bucket for reading CUR and business datasets
+stitcher_ai_s3_read_bucket = "my-company-cur-data-bucket"
+
+# Optional S3 paths for data reading
+cur_s3_path           = "cur-reports/hourly/"
+business_data_s3_path = "business-data/exports/"
+
+# S3 bucket for StitcherAI data exports
+stitcher_ai_s3_write_bucket = "my-company-stitcher-exports"
+
+# Optional S3 path for data writes
+s3_write_path = "stitcher-outputs/"

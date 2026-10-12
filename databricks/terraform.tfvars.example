@@ -1,0 +1,10 @@
+# Databricks CLI profiles Terraform authenticates with. Create them before running terraform:
+#   databricks auth login --host https://dbc-xxxx.cloud.databricks.com --profile stitcherai-workspace
+#   databricks auth login --host <ACCOUNT-CONSOLE-URL> --account-id <ACCOUNT-ID> --profile stitcherai-account
+# <ACCOUNT-CONSOLE-URL> is https://accounts.cloud.databricks.com on AWS, https://accounts.azuredatabricks.net
+# on Azure, or https://accounts.gcp.databricks.com on GCP.
+workspace_profile = "stitcherai-workspace"
+account_profile   = "stitcherai-account"
+
+# (Optional) SQL warehouse size
+# sql_warehouse_size = "2X-Small"

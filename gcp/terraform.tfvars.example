@@ -1,0 +1,17 @@
+# StitcherAI service account email that access is granted to (provided by StitcherAI)
+stitcher_ai_sa_email = "stitcherai-env-sa@stitcher-production.iam.gserviceaccount.com"
+
+# GCP project that houses the resources StitcherAI reads from / writes to
+gcp_project_id = "my-company-gcp-project"
+
+# Need 1: BigQuery dataset holding the GCP billing (cost) export
+cost_extract_dataset_id = "billing_export"
+
+# Need 2: GCS bucket/path holding business datasets to extract
+business_data_bucket = "my-company-business-data"
+business_data_path   = "business-data/exports/"
+
+# Need 3: BigQuery dataset and GCS bucket/path StitcherAI exports curated data into
+export_dataset_id  = "stitcher_exports"
+export_data_bucket = "my-company-stitcher-exports"
+export_data_path   = "stitcher-outputs/"

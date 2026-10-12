@@ -18,7 +18,7 @@ variable "stitcher_ai_service_account_id" {
     The ID of the service account for the StitcherAI environment, this grants stitcher sa access to the configured resources. 
     (Provided by StitcherAI)
   EOT
-  type = string
+  type        = string
 }
 
 variable "resource_group_name" {

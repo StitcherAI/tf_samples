@@ -1,0 +1,28 @@
+# Azure subscription the storage account lives in
+subscription_id = "00000000-0000-0000-0000-000000000000"
+
+# Display name for the Azure AD application / workload identity StitcherAI will use
+workload_identity_display_name = "StitcherAI-Access"
+
+# StitcherAI environment id (provided by StitcherAI)
+stitcherai_environment_id = "env-12345678-abcd-1234-efgh-123456789012"
+
+# StitcherAI service account id (provided by StitcherAI). This is the numeric unique id ("sub")
+# of StitcherAI's Google service account, used as the federated-credential subject for GCP->Azure
+# workload-identity federation. Use the exact value StitcherAI gives you.
+stitcher_ai_service_account_id = "123456789012345678901"
+
+# Resource group and storage account StitcherAI will read from / write to
+resource_group_name  = "my-company-rg"
+storage_account_name = "mycompanystorage"
+
+# Need 1 & 2: container and paths StitcherAI reads cost and business data from.
+# NOTE: extract paths must NOT end with '*' (matched as a literal prefix).
+read_storage_container_name = "source-data"
+cost_data_path              = "cost/"
+business_data_path          = "business-data/"
+
+# Need 3: container and path StitcherAI writes exported data to.
+# NOTE: the export path MUST end with '*' (matched as a glob prefix).
+write_storage_container_name = "stitcher-exports"
+stitcherai_write_path        = "exports/*"
