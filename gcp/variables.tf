@@ -1,12 +1,6 @@
-variable "stitcherai_environment_id" {
-  description = "The StitcherAI environment id. (Provided by StitcherAI)"
+variable "stitcher_ai_sa_email" {
+  description = "The StitcherAI service account email that access is granted to. (Provided by StitcherAI)"
   type        = string
-}
-
-variable "gcp_domain" {
-  description = "(Optional) The gcp domain for the Stitcher AI service."
-  type        = string
-  default     = null
 }
 
 variable "gcp_project_id" {

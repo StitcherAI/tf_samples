@@ -1,6 +1,6 @@
 variable "stitcher_aws_iam_principal_arn" {
   description = "The StitcherAI AWS IAM principal ARN. (Provided by StitcherAI)"
-  type    = string
+  type        = string
 }
 
 variable "stitcher_ai_environment_id" {
@@ -10,21 +10,21 @@ variable "stitcher_ai_environment_id" {
 
 variable "read_iam_role_name" {
   description = "The name of the read role to create in the customer AWS environment."
-  type = string
+  type        = string
 }
 
 variable "read_external_id" {
-  description = "External ID for the read role to enhance security, as recommended by AWS IAM."
+  description = "External ID for the read role to enhance security, as recommended by AWS IAM. Choose your own value and share the exact same value with StitcherAI."
   type        = string
 }
 
 variable "write_iam_role_name" {
   description = "The name of the write role to create in the customer AWS environment."
-  type = string
+  type        = string
 }
 
 variable "write_external_id" {
-  description = "External ID for the write role to enhance security, as recommended by AWS IAM."
+  description = "External ID for the write role to enhance security, as recommended by AWS IAM. Choose your own value and share the exact same value with StitcherAI."
   type        = string
 }
 
@@ -36,13 +36,13 @@ variable "stitcher_ai_s3_read_bucket" {
 variable "cur_s3_path" {
   description = "S3 path where the CUR is stored. (Optional)"
   type        = string
-  nullable  = true
+  nullable    = true
 }
 
 variable "business_data_s3_path" {
-  description = "S3 path where the CUR is stored. (Optional)"
+  description = "S3 path where the business datasets are stored. (Optional)"
   type        = string
-  nullable  = true
+  nullable    = true
 }
 
 variable "stitcher_ai_s3_write_bucket" {
@@ -53,5 +53,5 @@ variable "stitcher_ai_s3_write_bucket" {
 variable "s3_write_path" {
   description = "S3 path where the data-writes are done. (Optional)"
   type        = string
-  nullable  = true
+  nullable    = true
 }

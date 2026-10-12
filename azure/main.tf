@@ -1,19 +1,39 @@
+terraform {
+  required_version = ">= 1.3.0"
+
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = ">= 3.0"
+    }
+    azuread = {
+      source  = "hashicorp/azuread"
+      version = ">= 2.0"
+    }
+  }
+}
+
 provider "azurerm" {
   features {}
 
   subscription_id = var.subscription_id
 }
 
+# The Azure AD application/service-principal resources use the azuread provider, which is a separate provider from
+# azurerm and authenticates against your Microsoft Entra (Azure AD) tenant. It picks up credentials from your
+# environment (e.g. the Azure CLI via `az login`). See README for prerequisites.
+provider "azuread" {}
 
-# This module creates an Azure AD application/client/tenant infrastructure used to grant access to relevant Azure 
-# resources (cost or business datasets OR export locations) on a customer environemnt. Access to StitcherAI is granted
+
+# This module creates an Azure AD application/client/tenant infrastructure used to grant access to relevant Azure
+# resources (cost or business datasets OR export locations) on a customer environment. Access to StitcherAI is granted
 # via an AD application to avoid needing to provide StitcherAI with customer credentials.
-# Notes: 
-# * Customers can chose to create different AD principals for different access granting scenarios (e.g. separate read
+# Notes:
+# * Customers can choose to create different AD principals for different access granting scenarios (e.g. separate read
 # and write access within a single Azure environment).
 # * StitcherAI terraform modules are available at github.com:StitcherAI/tf-modules.git (public)
 
-# The below example simulates a customer granting StitcherAI access to their Azure environemnt for the following needs:
+# The below example simulates a customer granting StitcherAI access to their Azure environment for the following needs:
 # Need 1. Extracting Azure cost extract from an Azure storage account
 # Need 2. Extracting business datasets stored in an Azure storage account
 # Need 3. Exporting StitcherAI data to Azure storage account (example illustrates using the same AD principal)
@@ -29,11 +49,11 @@ provider "azurerm" {
 # For each application, we will get the client_id and tenant_id as outputs
 
 module "azure_ad_application" {
-  source = "git@github.com:StitcherAI/tf-modules.git//azure/ad-application"
+  source = "git::https://github.com/StitcherAI/tf-modules.git//azure/ad-application"
 
   workload_identity_display_name = var.workload_identity_display_name
-  environment_id    = var.stitcherai_environment_id
-  stitcher_ai_sa_id = var.stitcher_ai_service_account_id
+  environment_id                 = var.stitcherai_environment_id
+  stitcher_ai_sa_id              = var.stitcher_ai_service_account_id
 }
 
 # This value is needed when configuring data sources/destinations on the web app
@@ -50,6 +70,13 @@ output "azure_tenant_id" {
   description = "Value of the tenant id of the Azure AD tenant, this needs to be configured while creating data sources"
 }
 
+# This value is needed when configuring data sources/destinations on the web app
+output "azure_principal_id" {
+  value = module.azure_ad_application.azure_principal_id
+
+  description = "Value of the principal (object) id of the StitcherAI service principal, this needs to be configured while creating data sources"
+}
+
 
 # *********************************************************************************************************************
 # Need 1. Extracting Azure cost extract from an Azure storage account
@@ -58,7 +85,7 @@ output "azure_tenant_id" {
 
 # This module is used to grant access to extract data from Azure Blob Store
 module "azure_cost_extract" {
-  source = "git@github.com:StitcherAI/tf-modules.git//azure/blob-store-extract"
+  source = "git::https://github.com/StitcherAI/tf-modules.git//azure/blob-store-extract"
 
   stitcher_ai_service_principal_id = module.azure_ad_application.azure_principal_id
   storage_account_name             = var.storage_account_name
@@ -76,7 +103,7 @@ module "azure_cost_extract" {
 
 # This module is used to grant access to extract data from Azure Blob Store
 module "azure_business_data_extract" {
-  source = "git@github.com:StitcherAI/tf-modules.git//azure/blob-store-extract"
+  source = "git::https://github.com/StitcherAI/tf-modules.git//azure/blob-store-extract"
 
   stitcher_ai_service_principal_id = module.azure_ad_application.azure_principal_id
   storage_account_name             = var.storage_account_name
@@ -95,7 +122,7 @@ module "azure_business_data_extract" {
 
 # This module is used to export data to Azure Blob Store
 module "azure_blob_store_export" {
-  source = "git@github.com:StitcherAI/tf-modules.git//azure/blob-store-export"
+  source = "git::https://github.com/StitcherAI/tf-modules.git//azure/blob-store-export"
 
   stitcher_ai_service_principal_id = module.azure_ad_application.azure_principal_id
   storage_account_name             = var.storage_account_name
